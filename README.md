@@ -45,3 +45,23 @@ $ curl -X POST -H "Content-Type: application/json" -d '{"input": [6.4, 3.2, 4.5,
 
 ```
 
+6 - Expose same flask api but through docker locally
+
+```
+docker build -t py-ml-api .
+
+docker run -p 5000:5000 py-ml-api
+```
+
+7 - Testing the container exposed api locally:
+
+```
+$ curl -X POST -H "Content-Type: application/json" -d '{"input": [6.4, 3.2, 4.5, 1.5]}' http://localhost:5000/predict
+{"prediction":"versicolor"}
+
+$ curl -X POST -H "Content-Type: application/json" -d '{"input": [6.2, 3.4, 5.4, 2.3]}' http://localhost:5000/predict
+{"prediction":"virginica"}
+
+$ curl -X POST -H "Content-Type: application/json" -d '{"input": [5.1, 3.5, 1.4, 0.2]}' http://localhost:5000/predict
+{"prediction":"setosa"}
+```
